@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta charset="UTF-8" />
+<title>用户管理</title>
+</head>
+<body>
+	<h3>用户列表</h3><hr/>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>USERNAME</th>
+				<th>PASSWORD</th>
+				<th>NICKNAME</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user : ${user}">
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.username}"></td>
+				<td th:text="${user.password}"></td>
+				<td th:text="${user.name}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<button shiro:hasPermission="user:add" id="btn-user_save">添加</button>
+		<button shiro:hasPermission="user:del"  id="btn-user_del">删除</button>
+	</div>
+</body>
+<script type="text/javascript">
+	window.onload = function(){
+		document.getElementById('btn-user_save').onclick = function(e){
+			alert('save click');
+		}
+		
+		document.getElementById('btn-user_del').onclick = function(e){
+			alert('del click');
+		}
+	}
+</script>
+</html>

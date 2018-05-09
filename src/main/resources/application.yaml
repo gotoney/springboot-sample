@@ -1,0 +1,58 @@
+
+###### custom args
+user:
+  username: zeecle
+  password: zeecle
+
+###### datasource
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.200.11:3306/zeecle?useSSL=true
+    username: root
+    password: sdnware
+    driver-class-name: com.mysql.jdbc.Driver
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+  redis:
+    database: 0
+    #host: 192.168.200.103
+    host: 192.168.169.149
+    port: 6379
+    password: 123@abcd
+    pool: 
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+    
+###### mybatis
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.zeecle.springboot.pojo
+  
+###### pagehelper
+pagehelper:
+  helperDialet: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  

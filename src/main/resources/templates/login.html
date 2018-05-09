@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Login</title>
+</head>
+<body>
+	<h3>Login</h3><hr/>
+	<form action="/login" method="post">
+		Username: <input type="text" name="username" th:value="${user}"/><br/>
+		Password: <input type="password" name="password" /><br/>
+		<span style="color: red;" th:text="${message}"></span>
+		<input type="submit" value="login"/>
+	</form>
+</body>
+</html>

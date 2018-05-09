@@ -1,0 +1,5 @@
+	
+####SessionManager:	
+	在web shiro认证环境中，当浏览器（客户端）发起一个服务器会话时， AbstractSessionDAO(这里使用RedisSessionDAO管理)会调用doCreate()创建一个session
+	以标识当时会话，浏览器（客户端）所有的操作均基于此session中，session过期/停止由Sessionlistener来监听；
+	用户每次操作都会调用AbstractSessionDAO的update()，以保持会话一直存活！

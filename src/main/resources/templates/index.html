@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta charset="UTF-8" />
+<title>Index</title>
+</head>
+<body>
+	<h3>Hello, <span shiro:principal=""></span></h3><hr/>
+	<a shiro:hasPermission="user:view" href="/user">用户管理</a><br/>
+	<a shiro:hasPermission="per:view" href="/per">权限管理</a>
+	<hr/><a href="/logout">退出登录</a>
+</body>
+</html>

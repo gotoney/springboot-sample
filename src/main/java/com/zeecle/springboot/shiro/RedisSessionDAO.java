@@ -57,7 +57,7 @@ public class RedisSessionDAO extends AbstractSessionDAO {
 
 	@Override
 	protected Serializable doCreate(Session session) {
-		LOG.info("doCreate session");
+		LOG.info("create session");
 		Serializable sessionId = this.generateSessionId(session);
 		this.assignSessionId(session, sessionId);
 		this.saveSession(session);

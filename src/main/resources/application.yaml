@@ -33,8 +33,7 @@ spring:
     content-type: text/html
   redis:
     database: 0
-    #host: 192.168.200.103
-    host: 192.168.169.149
+    host: 192.168.200.169
     port: 6379
     password: 123@abcd
     pool: 

@@ -31,4 +31,9 @@ public class IndexController {
 	public String err403() {
 		return "error/403";
 	}
+	
+	@GetMapping(value = "websocket")
+	public String webSocketIndex() {
+		return "websocket";
+	}
 }

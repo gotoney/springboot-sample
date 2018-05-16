@@ -8,7 +8,8 @@
 <body>
 	<h3>Hello, <span shiro:principal=""></span></h3><hr/>
 	<a shiro:hasPermission="user:view" href="/user">用户管理</a><br/>
-	<a shiro:hasPermission="per:view" href="/per">权限管理</a>
+	<a shiro:hasPermission="per:view" href="/per">权限管理</a><br/>
+	<a href="/websocket">WebSocket</a>
 	<hr/><a href="/logout">退出登录</a>
 </body>
 </html>

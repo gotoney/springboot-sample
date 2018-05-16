@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta charset="UTF-8" />
+<title>WebSocket - Test</title>
+<script type="text/javascript" src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
+</head>
+<body>
+	<h3>WebSocket</h3><hr/>
+	<button onclick="connect()" id="intoBtn">加入聊天室</button><button id="outBtn" disabled="disabled" onclick="disconnect()">退出聊天室</button>
+	<div>
+		<textarea rows="40" cols="50" id="chatContent"></textarea>
+	</div>
+	<div>
+		<input type="text" id="message" /><button onclick="send()">发送消息</button>
+	</div>
+</body>
+<script type="text/javascript">
+
+	var stompClient = null,
+		socket = null,
+		chatContent = document.getElementById("chatContent");
+	
+	function connect(){
+		socket = new SockJS("http://192.168.200.224:8011/webSocketServer"),
+		stompClient = Stomp.over(socket);
+		stompClient.connect(
+				{},
+				function connectCallback(frame){
+					// console.log(frame);
+					document.getElementById("intoBtn").disabled = true;
+					document.getElementById("outBtn").disabled = false;
+					// 订阅聊天室topic
+					stompClient.subscribe("/topic/chatRoom", function(res){
+						var oldText = chatContent.innerHTML 
+						chatContent.innerHTML = oldText + res.body + '\r\n';
+					})
+				},
+				function erroeCallback(){
+					console.log("connect error!");
+				}
+			)
+	}
+	
+	function disconnect(){
+		if (stompClient != null) {
+			console.log(stompClient)
+            stompClient.disconnect();
+			document.getElementById("intoBtn").disabled = false;
+			document.getElementById("outBtn").disabled = true;
+			stompClient = null;
+			socket = null;
+        }
+	}
+
+	function send(){
+		if (stompClient != null) {
+			var message = document.getElementById("message").value;
+			stompClient.send("/app/chat", {}, message);
+        } else {
+        	alert("聊天室已断开！");
+        }
+	}
+	
+</script>
+</html>
